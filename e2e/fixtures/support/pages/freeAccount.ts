@@ -1,10 +1,12 @@
 import { expect, Locator, Page } from "@playwright/test";
 import dotenv from "dotenv"
-import { RegisterModel } from "../../registerModel";
+import { RegisterUserModel  } from "../../registerModel";
+
+dotenv.config()
 
 const FREE_ACCOUNT_URL = process.env.FREE_ACCOUNT_URL
 
-export class Registration {
+export class CreateAccountPage  {
     readonly page: Page;
     readonly inputName: Locator
     readonly inputEmail: Locator
@@ -24,11 +26,15 @@ export class Registration {
     }
 
     async goTo() {
-        await this.page.goto(`${FREE_ACCOUNT_URL}`);
+        if(!FREE_ACCOUNT_URL){
+            throw new Error('FREE_ACCOUNT_URL is not defined in .env')
+        }
+
+        await this.page.goto(FREE_ACCOUNT_URL);
         await expect(this.page).toHaveTitle('Cadastre-se na Frenet')
     }
 
-    async registerFreeAccount(reg: RegisterModel) {
+    async registerFreeAccount(reg: RegisterUserModel ) {
         await this.inputName.fill(reg.name)
         await this.inputEmail.fill(reg.email)
         await this.inputCellphone.fill(reg.cellPhone)

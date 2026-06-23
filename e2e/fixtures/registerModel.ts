@@ -1,8 +1,7 @@
-export interface RegisterModel {
+export interface RegisterUserModel  {
     name: string,
     email: string,
     cellPhone: string,
     password: string,
     confirmPassword: string,
-    is_done: boolean
 }

@@ -1,16 +1,16 @@
 import test, { TestInfo } from "@playwright/test";
-import { Registration } from './fixtures/support/pages/freeAccount'
+import { CreateAccountPage  } from './fixtures/support/pages/freeAccount'
 import data from './fixtures/FreeAccount.json'
-import { RegisterModel } from "./fixtures/registerModel";
+import { RegisterUserModel  } from "./fixtures/registerModel";
 
-let register: Registration
+let register: CreateAccountPage 
 
 test.beforeEach(({ page }) =>{
-    register = new Registration(page)
+    register = new CreateAccountPage (page)
 })
 
-test('Testando Register', async (testInfo) => {
-    const reg = data.TesteAutomacaoFreeAccount as RegisterModel
+test('Testando Registro gratis', async (testInfo) => {
+    const reg = data.TesteAutomacaoFreeAccount as RegisterUserModel 
 
     await register.goTo()
     await register.registerFreeAccount(reg)
