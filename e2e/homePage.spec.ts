@@ -1,7 +1,18 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
+import { CreateAccountPage } from './fixtures/support/pages/homePage'
+import data from './fixtures/FreeAccount.json'
+import { RegisterUserModel } from "./fixtures/registerModel";
 
-test('has title', async ({ page }) => {
-  await page.goto('/');
+let register: CreateAccountPage
 
-  await expect(page).toHaveTitle('Frenet: frete barato e descomplicado para a sua loja virtual');
-});
+test.beforeEach(({ page }) => {
+  register = new CreateAccountPage(page)
+})
+
+test('Testando Registro na pagina inicial', async () => {
+  const reg = data.TesteAutomacaoCreateAccount as RegisterUserModel
+
+  await register.goTo()
+  await register.acceptCookies()
+  await register.fillCreateAccountForm(reg)
+})
