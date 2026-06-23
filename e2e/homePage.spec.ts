@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 import { CreateAccountPage } from './fixtures/support/pages/homePage'
-import data from './fixtures/FreeAccount.json'
+import data from './fixtures/accounts.json'
 import { RegisterUserModel } from "./fixtures/registerModel";
 
 let register: CreateAccountPage

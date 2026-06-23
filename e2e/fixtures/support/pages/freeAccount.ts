@@ -7,9 +7,6 @@ dotenv.config()
 const FREE_ACCOUNT_URL = process.env.FREE_ACCOUNT_URL
 
 export class CreateFreeAccountPage {
-    registerFreeAccount(reg: RegisterUserModel) {
-        throw new Error("Method not implemented.");
-    }
     readonly page: Page;
     readonly inputName: Locator
     readonly inputEmail: Locator
@@ -28,9 +25,8 @@ export class CreateFreeAccountPage {
 
     async goTo() {
         if (!FREE_ACCOUNT_URL) {
-            throw new Error('FREE_ACCOUNT_URL is not defined in .env')
+            throw new Error('FREE_ACCOUNT is not defined in .env')
         }
-
         await this.page.goto(FREE_ACCOUNT_URL);
         await expect(this.page).toHaveTitle('Cadastre-se na Frenet')
     }
