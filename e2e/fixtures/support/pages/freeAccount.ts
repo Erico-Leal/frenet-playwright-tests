@@ -1,0 +1,39 @@
+import { expect, Locator, Page } from "@playwright/test";
+import dotenv from "dotenv"
+import { RegisterModel } from "../../registerModel";
+
+const FREE_ACCOUNT_URL = process.env.FREE_ACCOUNT_URL
+
+export class Registration {
+    readonly page: Page;
+    readonly inputName: Locator
+    readonly inputEmail: Locator
+    readonly inputCellphone: Locator
+    readonly inputPassword: Locator
+    readonly inputConfirmPassword: Locator
+    readonly inputCaptchaButton: Locator
+
+    constructor(page: Page) {
+        this.page = page;
+        this.inputName = this.page.locator('input[id="Name"]')
+        this.inputEmail = this.page.locator('input[id="Email"]')
+        this.inputCellphone = this.page.locator('input[id="Cellphone"]')
+        this.inputPassword = this.page.locator('input[id="Password"]')
+        this.inputConfirmPassword = this.page.locator('input[id="ConfirmPassword"]')
+        this.inputCaptchaButton = this.page.locator('div[class="recaptcha-checkbox-checkmark"]')
+    }
+
+    async goTo() {
+        await this.page.goto(`${FREE_ACCOUNT_URL}`);
+        await expect(this.page).toHaveTitle('Cadastre-se na Frenet')
+    }
+
+    async registerFreeAccount(reg: RegisterModel) {
+        await this.inputName.fill(reg.name)
+        await this.inputEmail.fill(reg.email)
+        await this.inputCellphone.fill(reg.cellPhone)
+        await this.inputPassword.fill(reg.password)
+        await this.inputConfirmPassword.fill(reg.confirmPassword)
+        //await this.inputCaptchaButton.click()
+    }
+}

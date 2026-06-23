@@ -1,0 +1,10 @@
+{
+    "TesteAutomacaoFreeAccount": {
+        "name": "TesteFreeAccount",
+        "email": "TesteFreeAccount@gmail.com",
+        "cellPhone": "53999056945",
+        "password": "99871233",
+        "confirmPassword": "99871233",
+        "is_done": false
+    }
+}
