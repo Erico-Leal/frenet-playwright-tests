@@ -16,3 +16,12 @@ test('Testando Registro na pagina inicial', async () => {
   await register.acceptCookies()
   await register.fillCreateAccountForm(reg)
 })
+
+test('Testando Registro indo para tela FreeAccount', async () => {
+  const reg = data.TesteAutomacaoCreateAccount as RegisterUserModel
+
+  await register.goTo()
+  await register.acceptCookies()
+  await register.ButtonRedirectCreateFreeAccount()
+  await register.newFreeAccount(reg)
+})

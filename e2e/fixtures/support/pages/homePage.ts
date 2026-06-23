@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 import dotenv from "dotenv"
 import { RegisterUserModel } from "../../registerModel";
+import { CreateFreeAccountPage } from "./freeAccount"
 
 dotenv.config()
 
@@ -38,6 +39,22 @@ export class CreateAccountPage {
         await this.inputPhoneNumber.fill(reg.cellPhone)
         await this.inputPassword.fill(reg.password)
         await this.inputConfirmPassword.fill(reg.confirmPassword)
+    }
+
+    async newFreeAccount(reg: RegisterUserModel) {
+        const freeAccount = new CreateFreeAccountPage(this.page)
+        
+        await freeAccount.inputName.fill(reg.name)
+        await freeAccount.inputEmail.fill(reg.email)
+        await freeAccount.inputCellphone.fill(reg.cellPhone)
+        await freeAccount.inputPassword.fill(reg.password)
+        await freeAccount.inputConfirmPassword.fill(reg.confirmPassword)
+
+    }
+
+    async ButtonRedirectCreateFreeAccount(){
+        const target = this.page.locator('//a[contains(@class,"elementor-button-link") and normalize-space()="Criar conta grátis"]')
+        await target.click()
     }
 
     async clickRecaptchaCheckbox() {
