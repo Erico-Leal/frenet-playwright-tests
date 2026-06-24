@@ -14,4 +14,6 @@ test('Testando Registro gratis', async () => {
 
     await register.goTo()
     await register.fillCreateFreeAccountForm(reg)
+    // await register.clickRecaptchaCheckbox()
+    // await register.CreateFreeAccountButton()
 })

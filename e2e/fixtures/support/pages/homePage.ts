@@ -49,7 +49,6 @@ export class CreateAccountPage {
         await freeAccount.inputCellphone.fill(reg.cellPhone)
         await freeAccount.inputPassword.fill(reg.password)
         await freeAccount.inputConfirmPassword.fill(reg.confirmPassword)
-
     }
 
     async ButtonRedirectCreateFreeAccount(){
@@ -67,4 +66,15 @@ export class CreateAccountPage {
         const acceptButton = this.page.locator('//button[contains(@class,"cmplz-accept") and normalize-space()="Aceitar"]')
         await acceptButton.click()
     }
+
+    async createButton(){
+        const target = this.page.locator('button[id="btnSubmit"]')
+        await target.click()
+    }
+
+    async createFreeAccountButton(){
+        const freeAccount = new CreateFreeAccountPage(this.page)
+        await freeAccount.CreateFreeAccountButton()
+    }
+    
 }

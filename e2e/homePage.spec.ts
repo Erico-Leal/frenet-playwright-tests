@@ -15,6 +15,8 @@ test('Testando Registro na pagina inicial', async () => {
   await register.goTo()
   await register.acceptCookies()
   await register.fillCreateAccountForm(reg)
+  // await register.clickRecaptchaCheckbox()
+  // await register.createButton()
 })
 
 test('Testando Registro indo para tela FreeAccount', async () => {
@@ -24,4 +26,6 @@ test('Testando Registro indo para tela FreeAccount', async () => {
   await register.acceptCookies()
   await register.ButtonRedirectCreateFreeAccount()
   await register.newFreeAccount(reg)
+  //await register.clickRecaptchaCheckbox()
+  // await register.createFreeAccountButton()
 })

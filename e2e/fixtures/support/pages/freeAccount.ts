@@ -43,4 +43,9 @@ export class CreateFreeAccountPage {
         const inputCaptchaButton = this.page.locator('div[class="recaptcha-checkbox-checkmark"]')
         await inputCaptchaButton.click()
     }
+
+    async CreateFreeAccountButton(){
+        const target = this.page.locator('button[id="btnSubmit"]')
+        await target.click()
+    }
 }
