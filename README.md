@@ -4,30 +4,37 @@ Automação End to End do fluxo de cadastro da Página da Frenet usando Playwrig
 
 ## Instruções de execução
 
-Instalar as dependências Utilizando:
+Instalar as dependências Utilizando No terminal:
 
 npm install
 
-Instalar os navegadores do Playwright:
+
+Instalar os navegadores do Playwright Utilizando no terminal:
 
 npx playwright install
+
 
 Crie um arquivo .env na raiz do projeto:
 
 BASE_URL=https://url-da-pagina-inicial
+
 FREE_ACCOUNT_URL=https://url-da-pagina-de-conta-gratis
 
-Para rodar todos os testes:
+
+Para rodar todos os testes Utilize:
 
 npx playwright test
 
-Para rodar com os navegadores abertos:
+
+Para rodar com os navegadores abertos Utilize:
 
 npx playwright test --headed
 
-Para Abrir o modo interativo do Playwright:
+
+Para Abrir o modo interativo do Playwright Utilize:
 
 npx playwright test --ui
+
 
 Para abrir o relatório de testes:
 
