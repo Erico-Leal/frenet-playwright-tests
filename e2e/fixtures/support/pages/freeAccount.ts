@@ -27,8 +27,9 @@ export class CreateFreeAccountPage {
         if (!FREE_ACCOUNT_URL) {
             throw new Error('FREE_ACCOUNT is not defined in .env')
         }
-        await this.page.goto(FREE_ACCOUNT_URL);
+        await this.page.goto(FREE_ACCOUNT_URL, { waitUntil: 'domcontentloaded' });
         await expect(this.page).toHaveTitle('Cadastre-se na Frenet')
+        await expect(this.inputName).toBeVisible({ timeout: 10000 })
     }
 
     async fillCreateFreeAccountForm(reg: RegisterUserModel) {

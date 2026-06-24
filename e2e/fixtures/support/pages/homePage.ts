@@ -29,8 +29,9 @@ export class CreateAccountPage {
             throw new Error('BASE_URL is not defined in .env')
         }
 
-        await this.page.goto(BASE_URL);
+        await this.page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
         await expect(this.page).toHaveTitle('Frenet: frete barato e descomplicado para a sua loja virtual')
+        await expect(this.inputName).toBeVisible({ timeout: 10000 })
     }
 
     async fillCreateAccountForm(reg: RegisterUserModel) {
@@ -43,7 +44,7 @@ export class CreateAccountPage {
 
     async newFreeAccount(reg: RegisterUserModel) {
         const freeAccount = new CreateFreeAccountPage(this.page)
-        
+
         await freeAccount.inputName.fill(reg.name)
         await freeAccount.inputEmail.fill(reg.email)
         await freeAccount.inputCellphone.fill(reg.cellPhone)
@@ -51,7 +52,7 @@ export class CreateAccountPage {
         await freeAccount.inputConfirmPassword.fill(reg.confirmPassword)
     }
 
-    async ButtonRedirectCreateFreeAccount(){
+    async ButtonRedirectCreateFreeAccount() {
         const target = this.page.locator('//a[contains(@class,"elementor-button-link") and normalize-space()="Criar conta grátis"]')
         await target.click()
     }
@@ -63,18 +64,29 @@ export class CreateAccountPage {
 
     async acceptCookies() {
         const cookieBanner = this.page.locator('#cmplz-cookiebanner-1-optin')
-        const acceptButton = this.page.locator('//button[contains(@class,"cmplz-accept") and normalize-space()="Aceitar"]')
+        const acceptButton = cookieBanner.locator('button.cmplz-accept')
+
+        await acceptButton.waitFor({ state: 'visible', timeout: 10000 }).catch(() => null)
+
+        if (!(await acceptButton.isVisible())) {
+            return
+        }
+
+        await expect(acceptButton).toBeVisible({ timeout: 10000 })
+        await expect(acceptButton).toBeEnabled({ timeout: 10000 })
+
         await acceptButton.click()
+
+        await expect(cookieBanner).toBeHidden({ timeout: 10000 })
     }
 
-    async createButton(){
+    async createButton() {
         const target = this.page.locator('button[id="btnSubmit"]')
         await target.click()
     }
 
-    async createFreeAccountButton(){
+    async createFreeAccountButton() {
         const freeAccount = new CreateFreeAccountPage(this.page)
         await freeAccount.CreateFreeAccountButton()
     }
-    
 }
