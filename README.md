@@ -1,51 +1,37 @@
 # Frenet Playwright Tests
 
-Automação End to end do fluxo de cadastro público da Frenet usando Playwright.
+Automação End to End do fluxo de cadastro da Página da Frenet usando Playwright.
 
 ## Instruções de execução
 
-Instalar as dependências:
+Instalar as dependências Utilizando:
 
-```bash
 npm install
-```
 
 Instalar os navegadores do Playwright:
 
-```bash
 npx playwright install
-```
 
-Crie um arquivo `.env` na raiz do projeto:
+Crie um arquivo .env na raiz do projeto:
 
-```env
 BASE_URL=https://url-da-pagina-inicial
 FREE_ACCOUNT_URL=https://url-da-pagina-de-conta-gratis
-```
 
 Para rodar todos os testes:
 
-```bash
 npx playwright test
-```
 
 Para rodar com os navegadores abertos:
 
-```bash
 npx playwright test --headed
-```
 
 Para Abrir o modo interativo do Playwright:
 
-```bash
 npx playwright test --ui
-```
 
 Para abrir o relatório de testes:
 
-```bash
 npx playwright show-report
-```
 
 ## Estrutura da automação de testes
 
@@ -60,7 +46,7 @@ uma nova funcão ou novos testes.
 
 ## Decisões que tomei
 
-Decidi adotar uma Estrutura de código com Page Objects, para melhorar a organizacão e manutencão do projeto, separei massas de dados em um JSON localizado nas fixtures, utilizei o dotenv para setar as URLS do projeto deixando-o mais limpo e organizado, e habilitei os testes multi Browsers
+Utilizei uma Estrutura de código com Page Objects, para melhorar a organizacão e manutencão do projeto, separei massas de dados em um JSON localizado nas fixtures, támbem utilizei o dotenv para setar as URLS do projeto deixando-o mais limpo e organizado, e habilitei os testes multi Browsers
 
 Támbem decidi criar metodos para ter uma melhor reutilizacão do código para acões comuns, Como Ir até a pagina, localizar botões e espacõs de input do usuario, utilizei seletores mais objetivos para reduzir erros e validei comportamentos da interface, como redirecionamento, interacão com botões, e testando exibicão de elementos como o Banner de cokies e o botão de "Aceitar"
 
