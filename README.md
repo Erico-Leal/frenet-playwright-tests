@@ -1,18 +1,16 @@
 # Frenet Playwright Tests
 
-Automação E2E do fluxo de cadastro público da Frenet usando Playwright.
-
-Este projeto foi desenvolvido como parte de um desafio técnico de QA
+Automação End to end do fluxo de cadastro público da Frenet usando Playwright.
 
 ## Instruções de execução
 
-Instale as dependências:
+Instalar as dependências:
 
 ```bash
 npm install
 ```
 
-Instale os navegadores do Playwright:
+Instalar os navegadores do Playwright:
 
 ```bash
 npx playwright install
@@ -25,87 +23,55 @@ BASE_URL=https://url-da-pagina-inicial
 FREE_ACCOUNT_URL=https://url-da-pagina-de-conta-gratis
 ```
 
-Rode todos os testes:
+Para rodar todos os testes:
 
 ```bash
 npx playwright test
 ```
 
-Rode com o navegador aberto:
+Para rodar com os navegadores abertos:
 
 ```bash
 npx playwright test --headed
 ```
 
-Abra o modo interativo do Playwright:
+Para Abrir o modo interativo do Playwright:
 
 ```bash
 npx playwright test --ui
 ```
 
-Rode apenas um arquivo de teste:
-
-```bash
-npx playwright test e2e/freeaccount.spec.ts
-```
-
-Abra o relatório:
+Para abrir o relatório de testes:
 
 ```bash
 npx playwright show-report
 ```
 
-## Estrutura da automação
+## Estrutura da automação de testes
 
-A automação foi separada em três partes principais:
+A estrutura do projeto foi separada em três partes principais:
 
-- Specs: arquivos com os cenários de teste.
-- Page Objects: classes com seletores e ações das páginas.
-- Fixtures: massa de dados e modelos usados nos testes.
+- Specs: onde ficam os arquivos com os cenários de teste.
+- Page Objects: onde criei classes com seletores e ações das páginas para deixar o codigo mais limpo.
+- Fixtures: onde deixei a massa de dados e modelos usados nos testes.
 
-Essa separação evita repetir código nos testes e deixa os cenários mais fáceis de ler e manter.
+Separei desta forma pois facilita a manutencão e deixa mais facil de se ler o código, facilita o processo de adicionar
+uma nova funcão ou novos testes.
 
-## Organização do código
+## Decisões que tomei
 
-```text
-e2e/
-  homepage.spec.ts
-  freeaccount.spec.ts
-  fixtures/
-    accounts.json
-    registerModel.ts
-    support/
-      pages/
-        homePage.ts
-        freeAccount.ts
-```
+Decidi adotar uma Estrutura de código com Page Objects, para melhorar a organizacão e manutencão do projeto, separei massas de dados em um JSON localizado nas fixtures, utilizei o dotenv para setar as URLS do projeto deixando-o mais limpo e organizado, e habilitei os testes multi Browsers
 
-- `homepage.spec.ts`: testes do fluxo pela página inicial.
-- `freeaccount.spec.ts`: testes do fluxo direto de conta grátis.
-- `homePage.ts`: Page Object da página inicial.
-- `freeAccount.ts`: Page Object da página de conta grátis.
-- `accounts.json`: massa de dados usada nos testes.
-- `registerModel.ts`: modelo dos dados de cadastro.
+Támbem decidi criar metodos para ter uma melhor reutilizacão do código para acões comuns, Como Ir até a pagina, localizar botões e espacõs de input do usuario, utilizei seletores mais objetivos para reduzir erros e validei comportamentos da interface, como redirecionamento, interacão com botões, e testando exibicão de elementos como o Banner de cokies e o botão de "Aceitar"
 
-## Decisões tomadas
+Durante o desenvolvimento dos page Object, percebi que o Captcha não conseguia ser acionado corretamente pelo teste da automatizao devido aos mecanismos antiBot do Site. Como a proposta do proposta do projeto, e automatizar o cadastro de contas, resolvi não tentar burlar o captcha
 
-Neste projeto, utilizei Playwright para automatizar testes E2E, aplicando boas práticas de organização, manutenção e confiabilidade dos testes. Estruturei o código com Page Objects, separei massas de dados em fixtures/JSON, utilizei variáveis de ambiente com dotenv e configurei a execução em múltiplos navegadores, como Chromium, Firefox e WebKit.
-
-Também criei métodos reutilizáveis para ações comuns da aplicação, trabalhei com seletores mais específicos para reduzir instabilidades e validei comportamentos importantes da interface, como redirecionamentos, interação com botões, exibição de elementos e tratamento do banner de cookies. A estrutura foi pensada para facilitar a manutenção, a execução local e uma futura integração com pipeline de CI/CD.
-
-Durante o desenvolvimento da automação, percebi que o reCAPTCHA não conseguia ser acionado corretamente pelo teste automatizado devido aos mecanismos antiBot da aplicação. Como a proposta do projeto não é burlar esse tipo de proteção, mantive essa limitação documentada.
-
-Mesmo assim, implementei os métodos responsáveis por clicar no reCAPTCHA e no botão de criação de conta, deixando o fluxo preparado para um ambiente de testes controlado, onde o captcha possa ser tratado por uma estratégia oficial, como chave de teste, bypass controlado ou desativação em homologação.
+Como o captcha não deixa seguir para os proximos passos como clicar no botão de criação de conta, então decidir ir até onde a página no estado atual me permite, porem deixei o projeto preparado como as funcões de clickar e validar o captcha e clicar em criar uma nova conta, por enquanto o teste vai até o preenchimento do formulario por conta das limitacões uma ideia de melhoria seria uma chave de teste, bypass controlado ou desativação do captcha no ambiente de testes.
 
 ## Limitações e possíveis melhorias
 
-- O fluxo possui reCAPTCHA, que não deve ser burlado em automações E2E reais.
-- Para um ambiente de testes, o ideal seria ter uma chave de teste, um bypass controlado ou uma versão do fluxo sem captcha.
-- Os testes atualmente preenchem o formulário, mas o clique final de criação pode depender da estratégia adotada para o reCAPTCHA.
-- Uma melhoria futura seria gerar dados dinâmicos para evitar conflito com usuários já cadastrados.
-- Também seria interessante adicionar scripts no `package.json` para simplificar os comandos de execução.
-
-## Observações
-
-- Evite usar dados reais ou sensíveis na massa de testes.
-- O relatório HTML do Playwright pode ser usado como evidência da execução.
+- O fluxo possui um Captcha, O tal qual não preferi burlar.
+- Seria bom futuramente ter uma chave de teste, um bypass controlado ou uma versão do fluxo sem captcha para facilitar a automacão.
+- Os testes estão apenas preenchendo o formulário de criar uma nova conta.
+- Funcões como clickar na checkBox do captcha e criar uma nova conta estão comentados pelo motivo do captcha, porem funcionam perfeitamente
+- Uma melhoria futura será implementar metodos de criar dados dinámicos para melhorar a escalabilidade dos testes e previnir conflitos ente usuarios da massa de teste.
