@@ -10,7 +10,7 @@ test.beforeEach(({ page }) => {
 })
 
 test('Testando Registro gratis', async () => {
-    const reg = data.TesteAutomacaoCreateAccount as RegisterUserModel
+    const reg = data.TesteAutomacaoCreateFreeAccount as RegisterUserModel
 
     await register.goTo()
     await register.fillCreateFreeAccountForm(reg)
