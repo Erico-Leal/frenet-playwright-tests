@@ -19,7 +19,7 @@ test('Test: criando gratis', async () => {
     // await register.CreateFreeAccountButton()
 })
 
-test.only('Test: criando uma conta gratis com dados dinamicos', async () => {
+test('Test: criando uma conta gratis com dados dinamicos', async () => {
     await register.goTo()
     const reg = await register.createFreeAccountWithDynamicData()
     await register.expectRegistrationFormFilled(reg)
