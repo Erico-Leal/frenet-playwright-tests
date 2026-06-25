@@ -1,10 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
-import dotenv from "dotenv"
 import { RegisterUserModel } from "../../registerModel";
 import { CreateFreeAccountPage } from "./freeAccount"
 import { faker } from "@faker-js/faker";
-
-dotenv.config()
 
 const BASE_URL = process.env.BASE_URL
 
@@ -43,25 +40,48 @@ export class CreateAccountPage {
         await this.inputConfirmPassword.fill(reg.confirmPassword)
     }
 
-    async newFreeAccount(reg: RegisterUserModel) {
+    async fillRedirectedFreeAccountForm(reg: RegisterUserModel) {
         const freeAccount = new CreateFreeAccountPage(this.page)
 
-        await freeAccount.inputName.fill(reg.name)
-        await freeAccount.inputEmail.fill(reg.email)
-        await freeAccount.inputCellphone.fill(reg.cellPhone)
-        await freeAccount.inputPassword.fill(reg.password)
-        await freeAccount.inputConfirmPassword.fill(reg.confirmPassword)
+        await freeAccount.fillCreateFreeAccountForm(reg)
     }
 
-    async newFreeAccountDynamicDatas() {
+    async fillRedirectedFreeAccountFormWithDynamicData(): Promise<RegisterUserModel> {
         const freeAccount = new CreateFreeAccountPage(this.page)
         const password = faker.internet.password()
 
-        await freeAccount.inputName.fill(faker.person.fullName())
-        await freeAccount.inputEmail.fill(faker.internet.email())
-        await freeAccount.inputCellphone.fill(`11${faker.string.numeric(9)}`)
-        await freeAccount.inputPassword.fill(password)
-        await freeAccount.inputConfirmPassword.fill(password)
+        const reg = {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            cellPhone: `11${faker.string.numeric(9)}`,
+            password: password,
+            confirmPassword: password
+        }
+
+        await freeAccount.fillCreateFreeAccountForm(reg)
+
+        return reg
+    }
+
+    async createFreeAccountButton() {
+        const freeAccount = new CreateFreeAccountPage(this.page)
+        await freeAccount.createFreeAccountButton()
+    }
+
+    async createAccountWithDynamicData(): Promise<RegisterUserModel> {
+        const password = faker.internet.password()
+
+        const reg = {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            cellPhone: `11${faker.string.numeric(9)}`,
+            password: password,
+            confirmPassword: password
+        }
+
+        await this.fillCreateAccountForm(reg)
+
+        return reg
     }
 
     async ButtonRedirectCreateFreeAccount() {
@@ -97,8 +117,20 @@ export class CreateAccountPage {
         await target.click()
     }
 
-    async createFreeAccountButton() {
+    async expectRegistrationFormFilled(reg: RegisterUserModel) {
+        await expect(this.inputName).toHaveValue(reg.name)
+        await expect(this.inputEmail).toHaveValue(reg.email)
+
+        const cellphoneValue = await this.inputPhoneNumber.inputValue()
+        expect(cellphoneValue.replace(/\D/g, '')).toBe(reg.cellPhone)
+
+        await expect(this.inputPassword).toHaveValue(reg.password)
+        await expect(this.inputConfirmPassword).toHaveValue(reg.confirmPassword)
+    }
+
+    async expectRedirectedFreeAccountFormFilled(reg: RegisterUserModel) {
         const freeAccount = new CreateFreeAccountPage(this.page)
-        await freeAccount.CreateFreeAccountButton()
+
+        await freeAccount.expectRegistrationFormFilled(reg)
     }
 }

@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 import dotenv from "dotenv"
 import { RegisterUserModel } from "../../registerModel";
-import { fakerPT_BR, faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
 dotenv.config()
 
@@ -46,7 +46,7 @@ export class CreateFreeAccountPage {
         await inputCaptchaButton.click()
     }
 
-    async CreateFreeAccountButton() {
+    async createFreeAccountButton() {
         const target = this.page.locator('button[id="btnSubmit"]')
         await target.click()
     }
@@ -70,7 +70,7 @@ export class CreateFreeAccountPage {
     async expectRegistrationFormFilled(reg: RegisterUserModel) {
         await expect(this.inputName).toHaveValue(reg.name)
         await expect(this.inputEmail).toHaveValue(reg.email)
-        
+
         const cellphoneValue = await this.inputCellphone.inputValue()
         expect(cellphoneValue.replace(/\D/g, '')).toBe(reg.cellPhone)
 
