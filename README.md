@@ -7,7 +7,7 @@ Automação End to End do fluxo de cadastro público da Frenet usando Playwright
 Para Instalar as dependências utilize:
 
 ```bash
-npm install
+npm ci
 ```
 
 Para Instalar os navegadores do Playwright utilize:
@@ -75,3 +75,11 @@ Como o ReCaptcha não deixa seguir para os proximos passos como clicar no botão
 - Os testes estão apenas preenchendo o formulário de criar uma nova conta.
 - Funcões como clickar na checkBox do ReCaptcha e criar uma nova conta estão comentados pelo motivo do ReCaptcha, porem funcionam perfeitamente
 - Uma melhoria futura será implementar metodos de criar dados dinámicos para melhorar a escalabilidade dos testes e previnir conflitos ente usuarios da massa de teste.
+
+## Melhorias
+- Implementei metodos para gerar dados dinamicos utilizando o Faker
+- Os testes agora validam os campos de input para confirmar se foram preenchidos corretamente
+- implementei uma validação de telefone, onde removo a máscara de telefone do site, e após -  - remover a mascara a validação compara os campos e confirma os dados,
+- fiz os dados dinâmicos retornarem um RegisterUserModel. assim posso validar melhor os dados.
+- melhorei a organização dos PageObject e a logica do mesmo.
+- Workflow foi atualizado para utilizar o node 24
