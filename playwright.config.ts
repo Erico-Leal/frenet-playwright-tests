@@ -1,6 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-import { configDotenv } from 'dotenv';
-import { on } from 'node:cluster';
 
 // Provide a minimal declaration for `process` to satisfy TypeScript when
 // @types/node is not installed.

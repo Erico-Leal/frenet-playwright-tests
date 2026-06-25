@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 import dotenv from "dotenv"
 import { RegisterUserModel } from "../../registerModel";
-import { fakerPT_BR,faker } from '@faker-js/faker';
+import { fakerPT_BR, faker } from '@faker-js/faker';
 
 dotenv.config()
 
@@ -51,13 +51,30 @@ export class CreateFreeAccountPage {
         await target.click()
     }
 
-    async createFreeAccountWithDynamicData() {
+    async createFreeAccountWithDynamicData(): Promise<RegisterUserModel> {
         const passwordFaker = faker.internet.password()
+
+        const reg = {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            cellPhone: `11${faker.string.numeric(9)}`,
+            password: passwordFaker,
+            confirmPassword: passwordFaker
+        }
+
+        await this.fillCreateFreeAccountForm(reg)
+
+        return reg
+    }
+
+    async expectRegistrationFormFilled(reg: RegisterUserModel) {
+        await expect(this.inputName).toHaveValue(reg.name)
+        await expect(this.inputEmail).toHaveValue(reg.email)
         
-        await this.inputName.fill(faker.person.fullName())
-        await this.inputEmail.fill(faker.internet.email())
-        await this.inputCellphone.fill(`11${faker.string.numeric(9)}`)
-        await this.inputPassword.fill(passwordFaker)
-        await this.inputConfirmPassword.fill(passwordFaker)
+        const cellphoneValue = await this.inputCellphone.inputValue()
+        expect(cellphoneValue.replace(/\D/g, '')).toBe(reg.cellPhone)
+
+        await expect(this.inputPassword).toHaveValue(reg.password)
+        await expect(this.inputConfirmPassword).toHaveValue(reg.confirmPassword)
     }
 }

@@ -14,13 +14,15 @@ test('Test: criando gratis', async () => {
 
     await register.goTo()
     await register.fillCreateFreeAccountForm(reg)
+    await register.expectRegistrationFormFilled(reg)
     // await register.clickRecaptchaCheckbox()
     // await register.CreateFreeAccountButton()
 })
 
-test('Test: criando uma conta gratis com dados dinamicos', async () => {
+test.only('Test: criando uma conta gratis com dados dinamicos', async () => {
     await register.goTo()
-    await register.createFreeAccountWithDynamicData()
+    const reg = await register.createFreeAccountWithDynamicData()
+    await register.expectRegistrationFormFilled(reg)
     // await register.clickRecaptchaCheckbox()
     // await register.CreateFreeAccountButton()
 
