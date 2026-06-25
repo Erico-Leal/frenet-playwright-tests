@@ -9,11 +9,19 @@ test.beforeEach(({ page }) => {
     register = new CreateFreeAccountPage(page)
 })
 
-test('Testando Registro gratis', async () => {
+test('Test: criando gratis', async () => {
     const reg = data.TesteAutomacaoCreateFreeAccount as RegisterUserModel
 
     await register.goTo()
     await register.fillCreateFreeAccountForm(reg)
     // await register.clickRecaptchaCheckbox()
     // await register.CreateFreeAccountButton()
+})
+
+test('Test: criando uma conta gratis com dados dinamicos', async () => {
+    await register.goTo()
+    await register.createFreeAccountWithDynamicData()
+    // await register.clickRecaptchaCheckbox()
+    // await register.CreateFreeAccountButton()
+
 })

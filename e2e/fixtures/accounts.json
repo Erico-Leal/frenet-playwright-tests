@@ -2,18 +2,18 @@
     "TesteAutomacaoCreateFreeAccount": {
         "name": "TestFreeAccount",
         "email": "TestFreeAccount@gmail.com",
-        "cellPhone": "53999056945",
-        "password": "99871233",
-        "confirmPassword": "99871233",
+        "cellPhone": "53999678953",
+        "password": "98871277",
+        "confirmPassword": "98871277",
         "is_done": false
     },
 
     "TesteAutomacaoCreateAccount": {
         "name": "TestCreateAccount",
         "email": "TestCreateAccount@gmail.com",
-        "cellPhone": "53999056945",
-        "password": "99871233",
-        "confirmPassword": "99871233",
+        "cellPhone": "53999678953",
+        "password": "98871277",
+        "confirmPassword": "98771277",
         "is_done": false
     }
 }

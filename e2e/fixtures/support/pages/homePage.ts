@@ -2,6 +2,7 @@ import { expect, Locator, Page } from "@playwright/test";
 import dotenv from "dotenv"
 import { RegisterUserModel } from "../../registerModel";
 import { CreateFreeAccountPage } from "./freeAccount"
+import { faker } from "@faker-js/faker";
 
 dotenv.config()
 
@@ -50,6 +51,17 @@ export class CreateAccountPage {
         await freeAccount.inputCellphone.fill(reg.cellPhone)
         await freeAccount.inputPassword.fill(reg.password)
         await freeAccount.inputConfirmPassword.fill(reg.confirmPassword)
+    }
+
+    async newFreeAccountDynamicDatas() {
+        const freeAccount = new CreateFreeAccountPage(this.page)
+        const password = faker.internet.password()
+
+        await freeAccount.inputName.fill(faker.person.fullName())
+        await freeAccount.inputEmail.fill(faker.internet.email())
+        await freeAccount.inputCellphone.fill(`11${faker.string.numeric(9)}`)
+        await freeAccount.inputPassword.fill(password)
+        await freeAccount.inputConfirmPassword.fill(password)
     }
 
     async ButtonRedirectCreateFreeAccount() {

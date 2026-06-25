@@ -9,7 +9,7 @@ test.beforeEach(({ page }) => {
   register = new CreateAccountPage(page)
 })
 
-test('Testando Registro na pagina inicial', async () => {
+test('Test: Criando uma conta na pagina inicial', async () => {
   const reg = data.TesteAutomacaoCreateAccount as RegisterUserModel
 
   await register.goTo()
@@ -19,13 +19,23 @@ test('Testando Registro na pagina inicial', async () => {
   // await register.createButton()
 })
 
-test('Testando Registro indo para tela FreeAccount', async () => {
+test('Test: Criar uma conta utilizando botão de ir para tela de cadastro', async () => {
   const reg = data.TesteAutomacaoCreateAccount as RegisterUserModel
 
   await register.goTo()
   await register.acceptCookies()
   await register.ButtonRedirectCreateFreeAccount()
   await register.newFreeAccount(reg)
+  //await register.clickRecaptchaCheckbox()
+  // await register.createFreeAccountButton()
+})
+
+test('Test: Criar uma conta utilizando botão de ir para tela de cadastro utilizando dados dinamicos', async () => {
+
+  await register.goTo()
+  await register.acceptCookies()
+  await register.ButtonRedirectCreateFreeAccount()
+  await register.newFreeAccountDynamicDatas()
   //await register.clickRecaptchaCheckbox()
   // await register.createFreeAccountButton()
 })

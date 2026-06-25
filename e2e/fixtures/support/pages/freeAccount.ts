@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 import dotenv from "dotenv"
 import { RegisterUserModel } from "../../registerModel";
+import { fakerPT_BR,faker } from '@faker-js/faker';
 
 dotenv.config()
 
@@ -45,8 +46,18 @@ export class CreateFreeAccountPage {
         await inputCaptchaButton.click()
     }
 
-    async CreateFreeAccountButton(){
+    async CreateFreeAccountButton() {
         const target = this.page.locator('button[id="btnSubmit"]')
         await target.click()
+    }
+
+    async createFreeAccountWithDynamicData() {
+        const passwordFaker = faker.internet.password()
+        
+        await this.inputName.fill(faker.person.fullName())
+        await this.inputEmail.fill(faker.internet.email())
+        await this.inputCellphone.fill(`11${faker.string.numeric(9)}`)
+        await this.inputPassword.fill(passwordFaker)
+        await this.inputConfirmPassword.fill(passwordFaker)
     }
 }
