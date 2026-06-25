@@ -81,5 +81,5 @@ Como o ReCaptcha não deixa seguir para os proximos passos como clicar no botão
 - Os testes agora validam os campos de input para confirmar se foram preenchidos corretamente
 - implementei uma validação de telefone, onde removo a máscara de telefone do site, e após -  - remover a mascara a validação compara os campos e confirma os dados,
 - fiz os dados dinâmicos retornarem um RegisterUserModel. assim posso validar melhor os dados.
-- melhorei a organização dos PageObject e a logica do mesmo.
+- melhorei a organização dos PageObject e a logica dos mesmos.
 - Workflow foi atualizado para utilizar o node 24
