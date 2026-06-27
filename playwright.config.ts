@@ -1,14 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
 
-// Provide a minimal declaration for `process` to satisfy TypeScript when
-// @types/node is not installed.
-require('dotenv').config()
+dotenv.config();
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
