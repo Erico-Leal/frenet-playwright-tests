@@ -9,7 +9,7 @@ test.beforeEach(({ page }) => {
     register = new CreateFreeAccountPage(page)
 })
 
-test('Test: criando gratis', async () => {
+test('Test: criando uma conta gratis', async () => {
     const reg = data.TesteAutomacaoCreateFreeAccount as RegisterUserModel
 
     await register.goTo()

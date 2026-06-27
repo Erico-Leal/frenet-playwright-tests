@@ -77,9 +77,9 @@ Como o ReCaptcha não deixa seguir para os proximos passos como clicar no botão
 - Uma melhoria futura será implementar metodos de criar dados dinámicos para melhorar a escalabilidade dos testes e previnir conflitos ente usuarios da massa de teste.
 
 ## Melhorias
-- Implementei metodos para gerar dados dinamicos utilizando o Faker
-- Os testes agora validam os campos de input para confirmar se foram preenchidos corretamente
-- implementei uma validação de telefone, onde removo a máscara de telefone do site, e após -  - remover a mascara a validação compara os campos e confirma os dados,
-- fiz os dados dinâmicos retornarem um RegisterUserModel. assim posso validar melhor os dados.
+- Observei nas limitacões e possiveis melhorias que utilizar dados dinamicos seria um grande passo de melhoria para o projeto, então implementei metodos para gerar dados dinamicos utilizando o Faker 
+- os testes agora validam os campos de input para confirmar se foram preenchidos antes de continuar para o proximo passo.
+- implementei uma validação de telefone, onde removo a máscara de telefone do site, e após remover a mascara validacão compara os campos e confirma os dados,
+- fiz os dados dinâmicos retornarem um "RegisterUserModel". assim posso validar os dados mesmo eles sendo gerados dinâmicamente.
 - melhorei a organização dos PageObject e a logica dos mesmos.
-- Workflow foi atualizado para utilizar o node 24
+- Workflow agora foi atualizado para utilizar o node 24.

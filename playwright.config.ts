@@ -17,6 +17,7 @@ require('dotenv').config()
  */
 export default defineConfig({
   testDir: './e2e',
+
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -36,7 +37,7 @@ export default defineConfig({
 
     trace: 'on-first-retry',
     baseURL: process.env.BASE_URL,
-    screenshot: 'on'
+    screenshot: 'on',
   },
 
   /* Configure projects for major browsers */

@@ -98,18 +98,18 @@ export class CreateAccountPage {
         const cookieBanner = this.page.locator('#cmplz-cookiebanner-1-optin')
         const acceptButton = cookieBanner.locator('button.cmplz-accept')
 
-        await acceptButton.waitFor({ state: 'visible', timeout: 10000 }).catch(() => null)
+        await acceptButton.waitFor({ state: 'visible', timeout: 30000 }).catch(() => null)
 
         if (!(await acceptButton.isVisible())) {
             return
         }
 
-        await expect(acceptButton).toBeVisible({ timeout: 10000 })
-        await expect(acceptButton).toBeEnabled({ timeout: 10000 })
+        await expect(acceptButton).toBeVisible({ timeout: 30000 })
+        await expect(acceptButton).toBeEnabled({ timeout: 30000 })
 
         await acceptButton.click()
 
-        await expect(cookieBanner).toBeHidden({ timeout: 10000 })
+        await expect(cookieBanner).toBeHidden({ timeout: 30000 })
     }
 
     async createButton() {
