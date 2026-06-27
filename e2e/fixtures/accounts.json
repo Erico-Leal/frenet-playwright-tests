@@ -4,8 +4,7 @@
         "email": "TestFreeAccount@gmail.com",
         "cellPhone": "53999678953",
         "password": "98871277",
-        "confirmPassword": "98871277",
-        "is_done": false
+        "confirmPassword": "98871277"
     },
 
     "TesteAutomacaoCreateAccount": {
@@ -13,7 +12,6 @@
         "email": "TestCreateAccount@gmail.com",
         "cellPhone": "53999678953",
         "password": "98871277",
-        "confirmPassword": "98871277",
-        "is_done": false
+        "confirmPassword": "98871277"
     }
 }
