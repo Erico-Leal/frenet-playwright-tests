@@ -15,6 +15,7 @@ export class CreateFreeAccountPage {
     readonly inputPassword: Locator
     readonly inputConfirmPassword: Locator
     readonly invalidName: Locator
+    readonly invalidEmail: Locator
 
     constructor(page: Page) {
         this.page = page;
@@ -24,6 +25,7 @@ export class CreateFreeAccountPage {
         this.inputPassword = this.page.locator('input[id="Password"]')
         this.inputConfirmPassword = this.page.locator('input[id="ConfirmPassword"]')
         this.invalidName = this.page.locator('p[id="Name_msg"]')
+        this.invalidEmail = this.page.locator('p[id="Email_msg"]')
     }
 
     async goTo() {
@@ -91,5 +93,19 @@ export class CreateFreeAccountPage {
 
         await expect(this.invalidName).toBeVisible();
         await expect(this.invalidName).toHaveText('Digite seu nome completo.');
+    }
+
+    async expectInvalidEmail(reg: RegisterUserModel){
+        const form = this.page.locator('form#registerForm')
+
+        const isValid = await this.inputEmail.evaluate((input: HTMLInputElement) => input.validity.valid)
+        expect(isValid).toBe(false)
+
+        await form.evaluate((element) => {
+            element.classList.add('was-validated')
+        })
+
+        await expect(this.invalidEmail).toBeVisible()
+        await expect(this.invalidEmail).toHaveText('Digite um e-mail válido.')
     }
 }

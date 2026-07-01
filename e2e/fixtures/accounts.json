@@ -1,13 +1,13 @@
 {
     "TesteAutomacaoCreateFreeAccount": {
-        "name": "TestFreeAccount",
+        "name": "Érico leal",
         "email": "TestFreeAccount@gmail.com",
         "cellPhone": "53999678953",
         "password": "98871277",
         "confirmPassword": "98871277"
     },
     "TesteAutomacaoCreateAccount": {
-        "name": "TestCreateAccount",
+        "name": "Érico leal",
         "email": "TestCreateAccount@gmail.com",
         "cellPhone": "53999678953",
         "password": "98871277",
@@ -21,15 +21,15 @@
         "confirmPassword": "98871277"
     },
     "EmailInvalido": {
-        "name": "TestInvalidEmail",
+        "name": "Érico leal",
         "email": "",
         "cellPhone": "53999678953",
         "password": "98871277",
         "confirmPassword": "98871277"
     },
     "NumeroDeTelefoneInvalido": {
-        "name": "testInvalidCellPhone",
-        "email": "TestInvalidName@gmail.com",
+        "name": "Érico leal",
+        "email": "TestInvalidCellPhone@gmail.com",
         "cellPhone": "",
         "password": "98871277",
         "confirmPassword": "98871277"

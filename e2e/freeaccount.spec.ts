@@ -41,5 +41,14 @@ test.describe('Validacoes', () => {
         await register.expectRegistrationFormFilled(reg)
         await register.expectInvalidName(reg)
     })
+
+    test.only('Test: Email invalido', async () => {
+        const reg = data.EmailInvalido as RegisterUserModel
+
+        await register.goTo()
+        await register.fillCreateFreeAccountForm(reg)
+        await register.expectRegistrationFormFilled(reg)
+        await register.expectInvalidEmail(reg)
+    })
 })
 
