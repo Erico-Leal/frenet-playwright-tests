@@ -16,6 +16,7 @@ export class CreateFreeAccountPage {
     readonly inputConfirmPassword: Locator
     readonly invalidName: Locator
     readonly invalidEmail: Locator
+    readonly invalidCellPhone: Locator
 
     constructor(page: Page) {
         this.page = page;
@@ -26,6 +27,7 @@ export class CreateFreeAccountPage {
         this.inputConfirmPassword = this.page.locator('input[id="ConfirmPassword"]')
         this.invalidName = this.page.locator('p[id="Name_msg"]')
         this.invalidEmail = this.page.locator('p[id="Email_msg"]')
+        this.invalidCellPhone = this.page.locator('p[id="Cellphone_msg"]')
     }
 
     async goTo() {
@@ -95,7 +97,7 @@ export class CreateFreeAccountPage {
         await expect(this.invalidName).toHaveText('Digite seu nome completo.');
     }
 
-    async expectInvalidEmail(reg: RegisterUserModel){
+    async expectInvalidEmail(reg: RegisterUserModel) {
         const form = this.page.locator('form#registerForm')
 
         const isValid = await this.inputEmail.evaluate((input: HTMLInputElement) => input.validity.valid)
@@ -107,5 +109,19 @@ export class CreateFreeAccountPage {
 
         await expect(this.invalidEmail).toBeVisible()
         await expect(this.invalidEmail).toHaveText('Digite um e-mail válido.')
+    }
+
+    async expectInvalidCellPhone(reg: RegisterUserModel) {
+        const form = this.page.locator('form#registerForm')
+
+        const isValid = await this.inputCellphone.evaluate((input: HTMLInputElement) => input.validity.valid)
+        expect(isValid).toBe(false)
+
+        await form.evaluate((element) => {
+            element.classList.add('was-validated')
+        })
+
+        await expect(this.invalidCellPhone).toBeVisible()
+        await expect(this.invalidCellPhone).toHaveText('Informe um número de celular válido.')
     }
 }

@@ -50,5 +50,14 @@ test.describe('Validacoes', () => {
         await register.expectRegistrationFormFilled(reg)
         await register.expectInvalidEmail(reg)
     })
+
+    test.only('Test: Numero de Telefone invalido', async () => {
+        const reg = data.NumeroDeTelefoneInvalido as RegisterUserModel
+
+        await register.goTo()
+        await register.fillCreateFreeAccountForm(reg)
+        await register.expectRegistrationFormFilled(reg)
+        await register.expectInvalidCellPhone(reg)
+    })
 })
 
