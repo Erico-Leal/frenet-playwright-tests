@@ -51,7 +51,7 @@ test.describe('Validacoes', () => {
         await register.expectInvalidEmail(reg)
     })
 
-    test.only('Test: Numero de Telefone invalido', async () => {
+    test('Test: Numero de Telefone invalido', async () => {
         const reg = data.NumeroDeTelefoneInvalido as RegisterUserModel
 
         await register.goTo()
