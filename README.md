@@ -83,3 +83,4 @@ Como o ReCaptcha não deixa seguir para os proximos passos como clicar no botão
 - fiz os dados dinâmicos retornarem um "RegisterUserModel". assim posso validar os dados mesmo eles sendo gerados dinâmicamente.
 - melhorei a organização dos PageObject e a logica dos mesmos.
 - Workflow agora foi atualizado para utilizar o node 24.
+- Implementei validacões para "Negative tests/Testes negativos" como validacoes de campos obrigatórios e campos invalidos
