@@ -6,11 +6,31 @@
         "password": "98871277",
         "confirmPassword": "98871277"
     },
-
     "TesteAutomacaoCreateAccount": {
         "name": "TestCreateAccount",
         "email": "TestCreateAccount@gmail.com",
         "cellPhone": "53999678953",
+        "password": "98871277",
+        "confirmPassword": "98871277"
+    },
+    "NomeInvalido": {
+        "name": "",
+        "email": "TestInvalidName@gmail.com",
+        "cellPhone": "53999678953",
+        "password": "98871277",
+        "confirmPassword": "98871277"
+    },
+    "EmailInvalido": {
+        "name": "TestInvalidEmail",
+        "email": "",
+        "cellPhone": "53999678953",
+        "password": "98871277",
+        "confirmPassword": "98871277"
+    },
+    "NumeroDeTelefoneInvalido": {
+        "name": "testInvalidCellPhone",
+        "email": "TestInvalidName@gmail.com",
+        "cellPhone": "",
         "password": "98871277",
         "confirmPassword": "98871277"
     }

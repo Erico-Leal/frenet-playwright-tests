@@ -39,6 +39,21 @@ export class CreateAccountPage {
         await this.inputPassword.fill(reg.password)
         await this.inputConfirmPassword.fill(reg.confirmPassword)
     }
+    async createAccountWithDynamicData(): Promise<RegisterUserModel> {
+        const password = faker.internet.password()
+
+        const reg = {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            cellPhone: `11${faker.string.numeric(9)}`,
+            password: password,
+            confirmPassword: password
+        }
+
+        await this.fillCreateAccountForm(reg)
+
+        return reg
+    }
 
     async fillRedirectedFreeAccountForm(reg: RegisterUserModel) {
         const freeAccount = new CreateFreeAccountPage(this.page)
@@ -63,25 +78,9 @@ export class CreateAccountPage {
         return reg
     }
 
-    async createFreeAccountButton() {
-        const freeAccount = new CreateFreeAccountPage(this.page)
-        await freeAccount.createFreeAccountButton()
-    }
-
-    async createAccountWithDynamicData(): Promise<RegisterUserModel> {
-        const password = faker.internet.password()
-
-        const reg = {
-            name: faker.person.fullName(),
-            email: faker.internet.email(),
-            cellPhone: `11${faker.string.numeric(9)}`,
-            password: password,
-            confirmPassword: password
-        }
-
-        await this.fillCreateAccountForm(reg)
-
-        return reg
+    async createButton() {
+        const target = this.page.locator('button[id="btnSubmit"]')
+        await target.click()
     }
 
     async ButtonRedirectCreateFreeAccount() {
@@ -110,11 +109,6 @@ export class CreateAccountPage {
         await acceptButton.click()
 
         await expect(cookieBanner).toBeHidden({ timeout: 30000 })
-    }
-
-    async createButton() {
-        const target = this.page.locator('button[id="btnSubmit"]')
-        await target.click()
     }
 
     async expectRegistrationFormFilled(reg: RegisterUserModel) {

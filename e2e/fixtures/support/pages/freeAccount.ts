@@ -14,6 +14,7 @@ export class CreateFreeAccountPage {
     readonly inputCellphone: Locator
     readonly inputPassword: Locator
     readonly inputConfirmPassword: Locator
+    readonly invalidName: Locator
 
     constructor(page: Page) {
         this.page = page;
@@ -22,6 +23,7 @@ export class CreateFreeAccountPage {
         this.inputCellphone = this.page.locator('input[id="Cellphone"]')
         this.inputPassword = this.page.locator('input[id="Password"]')
         this.inputConfirmPassword = this.page.locator('input[id="ConfirmPassword"]')
+        this.invalidName = this.page.locator('p[id="Name_msg"]')
     }
 
     async goTo() {
@@ -41,16 +43,6 @@ export class CreateFreeAccountPage {
         await this.inputConfirmPassword.fill(reg.confirmPassword)
     }
 
-    async clickRecaptchaCheckbox() {
-        const inputCaptchaButton = this.page.locator('div[class="recaptcha-checkbox-checkmark"]')
-        await inputCaptchaButton.click()
-    }
-
-    async createFreeAccountButton() {
-        const target = this.page.locator('button[id="btnSubmit"]')
-        await target.click()
-    }
-
     async createFreeAccountWithDynamicData(): Promise<RegisterUserModel> {
         const passwordFaker = faker.internet.password()
 
@@ -67,6 +59,15 @@ export class CreateFreeAccountPage {
         return reg
     }
 
+    async createFreeAccountButton() {
+        const target = this.page.locator('button[id="btnSubmit"]')
+        await target.click()
+    }
+    async clickRecaptchaCheckbox() {
+        const inputCaptchaButton = this.page.locator('div[class="recaptcha-checkbox-checkmark"]')
+        await inputCaptchaButton.click()
+    }
+
     async expectRegistrationFormFilled(reg: RegisterUserModel) {
         await expect(this.inputName).toHaveValue(reg.name)
         await expect(this.inputEmail).toHaveValue(reg.email)
@@ -76,5 +77,19 @@ export class CreateFreeAccountPage {
 
         await expect(this.inputPassword).toHaveValue(reg.password)
         await expect(this.inputConfirmPassword).toHaveValue(reg.confirmPassword)
+    }
+
+    async expectInvalidName(reg: RegisterUserModel) {
+        const form = this.page.locator('form#registerForm');
+
+        const isValid = await this.inputName.evaluate((input: HTMLInputElement) => input.validity.valid);
+        expect(isValid).toBe(false);
+
+        await form.evaluate((element) => {
+            element.classList.add('was-validated');
+        });
+
+        await expect(this.invalidName).toBeVisible();
+        await expect(this.invalidName).toHaveText('Digite seu nome completo.');
     }
 }
