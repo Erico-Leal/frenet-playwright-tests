@@ -59,5 +59,24 @@ test.describe('Validacoes', () => {
         await register.expectRegistrationFormFilled(reg)
         await register.expectInvalidCellPhone(reg)
     })
+    
+    test('Test: Campo Obrigatório ', async () => {
+        const reg = data.CampoObrigatorio as RegisterUserModel
+
+        await register.goTo()
+        await register.fillCreateFreeAccountForm(reg)
+        await register.expectRegistrationFormFilled(reg)
+        await register.expectInvalidPassword(reg)
+    })
+    
+    test('Test: Senhas divergentes ', async () => {
+        const reg = data.SenhasDivergentes as RegisterUserModel
+
+        await register.goTo()
+        await register.fillCreateFreeAccountForm(reg)
+        await register.expectRegistrationFormFilled(reg)
+        await register.expectInvalidConfirmPassword(reg)
+    })
+
 })
 

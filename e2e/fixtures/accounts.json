@@ -33,5 +33,19 @@
         "cellPhone": "",
         "password": "98871277",
         "confirmPassword": "98871277"
+    },
+    "CampoObrigatorio": {
+        "name": "Érico leal",
+        "email": "TestInvalidCellPhone@gmail.com",
+        "cellPhone": "53999678953",
+        "password": "",
+        "confirmPassword": "98871277"
+    },
+    "SenhasDivergentes": {
+        "name": "Érico leal",
+        "email": "TestInvalidCellPhone@gmail.com",
+        "cellPhone": "53999678953",
+        "password": "98871277",
+        "confirmPassword": "9887127787243"
     }
 }

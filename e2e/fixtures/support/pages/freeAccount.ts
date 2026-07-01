@@ -17,6 +17,8 @@ export class CreateFreeAccountPage {
     readonly invalidName: Locator
     readonly invalidEmail: Locator
     readonly invalidCellPhone: Locator
+    readonly invalidPassword: Locator
+    readonly invalidConfirmPassword: Locator
 
     constructor(page: Page) {
         this.page = page;
@@ -28,6 +30,8 @@ export class CreateFreeAccountPage {
         this.invalidName = this.page.locator('p[id="Name_msg"]')
         this.invalidEmail = this.page.locator('p[id="Email_msg"]')
         this.invalidCellPhone = this.page.locator('p[id="Cellphone_msg"]')
+        this.invalidPassword = this.page.locator('p[id="Password_msg"]')
+        this.invalidConfirmPassword = this.page.locator('p[id="ConfirmPassword_msg"]')
     }
 
     async goTo() {
@@ -123,5 +127,38 @@ export class CreateFreeAccountPage {
 
         await expect(this.invalidCellPhone).toBeVisible()
         await expect(this.invalidCellPhone).toHaveText('Informe um número de celular válido.')
+    }
+
+    async expectInvalidPassword(reg: RegisterUserModel) {
+        const form = this.page.locator('form#registerForm')
+
+        const isValid = await this.inputPassword.evaluate((input: HTMLInputElement) => input.validity.valid)
+        expect(isValid).toBe(false)
+
+        await form.evaluate((element) => {
+            element.classList.add('was-validated')
+        })
+
+        await expect(this.invalidPassword).toBeVisible()
+        await expect(this.invalidPassword).toHaveText('Campo obrigatório.')
+    }
+
+    async expectInvalidConfirmPassword(reg: RegisterUserModel) {
+        const form = this.page.locator('form#registerForm')
+
+        await this.inputPassword.click()
+        await this.inputPassword.pressSequentially(reg.password)
+
+        await this.inputConfirmPassword.click()
+        await this.inputConfirmPassword.pressSequentially(reg.confirmPassword)
+
+        await this.inputConfirmPassword.blur()
+
+        await form.evaluate((element) => {
+            element.classList.add('was-validated')
+        })
+
+        await expect(this.invalidConfirmPassword).toBeVisible()
+        await expect(this.invalidConfirmPassword).toHaveText('Senhas não conferem')
     }
 }
